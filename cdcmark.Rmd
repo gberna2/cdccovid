@@ -1,0 +1,51 @@
+---
+title: "covid" 
+output: html_document
+---
+
+```{r echo=FALSE, include=FALSE}
+library(RSocrata)
+library(tidyverse)
+library(lubridate)
+library(data.table)
+```
+
+
+```{r setup, echo=TRUE}
+knitr::opts_chunk$set(echo = FALSE)
+# this is the socrata connection
+g<-read.socrata("https://data.cdc.gov/resource/9mfq-cb36.json", app_token = "du1xYluz5Q3hWLPoeoxced3Dg", stringsAsFactors = FALSE)
+# data is imported as characters following syntax converst to numeric
+g$tot_death=as.numeric(g$tot_death)
+g$new_death=as.numeric(g$new_death)
+g$new_case=as.numeric(g$new_case)
+```
+
+This is the covid new cases chart
+
+```{r echo=TRUE, include=TRUE}
+ma<- g %>%
+    filter(state=="MA") %>%
+    filter(as.Date(submission_date)>"2020-05-22")%>%
+    select(submission_date, tot_death, new_case, new_death) %>%
+    rename("total_deaths"=tot_death, "date"= submission_date)
+
+ggplot(ma, aes(date, new_case))+
+    geom_line()+
+    theme_classic()
+```
+
+
+Plot for new deaths
+```{r echo=TRUE}
+ma<- g %>%
+    filter(state=="MA") %>%
+    filter(as.Date(submission_date)>"2020-05-22")%>%
+    select(submission_date, tot_death, new_case, new_death, ) %>%
+    rename("total_deaths"=tot_death, "date"= submission_date)
+
+ggplot(ma, aes(date, new_death))+
+    geom_line()+
+    theme_classic()
+```
+
