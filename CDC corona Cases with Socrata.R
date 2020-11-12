@@ -31,34 +31,5 @@ caseplot<-ggplot(ma, aes(date, new_case))+
 ggplot(ma, aes(date, new_death))+
     geom_line()
 
-view(ma)
-
-attach(ma)
-
-ggplot(ma, aes(submission_date, tot_death))+
-    geom_line()
-
-view(ma)
-
-b<- 21.23
-
-view(test)
-
-class(new_case)
-
-bi<- g %>%
-    select(tot_death)
-i<-as.numeric(unlist(bi))
-
-o<- ma %>%
-    as.numeric(unlist(tot_death))
-
-               
-ggplot(td, aes(submission_date, tot_death))+
-    geom_point()
-
-library()
-getwd()
-
 
 
