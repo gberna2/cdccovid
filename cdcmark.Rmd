@@ -1,5 +1,6 @@
 ---
 title: "covid" 
+Author: "GB"
 output: html_document
 ---
 
@@ -11,7 +12,7 @@ library(data.table)
 ```
 
 
-```{r setup, echo=TRUE}
+```{r setup, echo=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 # this is the socrata connection
 g<-read.socrata("https://data.cdc.gov/resource/9mfq-cb36.json", app_token = "du1xYluz5Q3hWLPoeoxced3Dg", stringsAsFactors = FALSE)
@@ -21,7 +22,7 @@ g$new_death=as.numeric(g$new_death)
 g$new_case=as.numeric(g$new_case)
 ```
 
-This is the covid new cases chart
+## This is the covid new cases chart
 
 ```{r echo=TRUE, include=TRUE}
 ma<- g %>%
@@ -35,8 +36,8 @@ ggplot(ma, aes(date, new_case))+
     theme_classic()
 ```
 
+## Plot for new deaths
 
-Plot for new deaths
 ```{r echo=TRUE}
 ma<- g %>%
     filter(state=="MA") %>%
@@ -47,5 +48,8 @@ ma<- g %>%
 ggplot(ma, aes(date, new_death))+
     geom_line()+
     theme_classic()
+```
+```{r}
+
 ```
 
