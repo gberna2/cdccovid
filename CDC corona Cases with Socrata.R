@@ -12,6 +12,7 @@ g<-read.socrata("https://data.cdc.gov/resource/9mfq-cb36.json", app_token = "du1
 g$tot_death=as.numeric(g$tot_death)
 g$new_death=as.numeric(g$new_death)
 g$new_case=as.numeric(g$new_case)
+g$prob_cases=as.numeric(g$prob_cases)
 
 # massachusetts total deaths
 ma<- g %>%
@@ -25,11 +26,29 @@ totaldeathplot<-ggplot(ma, aes(date, total_deaths))+
 
 # massachusetts new cases
 caseplot<-ggplot(ma, aes(date, new_case))+
-    geom_line()
+    geom_line()+
+    theme_classic()
 
 # new deaths
 ggplot(ma, aes(date, new_death))+
-    geom_line()
+    geom_line()+
+    theme_classic()
 
 
+# ma new cases and probable cases
 
+manewprob<- g%>%
+    filter(state=="MA") %>%
+    select(submission_date, state, new_case, prob_cases)%>%
+    na.omit()%>%
+    filter(as.Date(submission_date)>"2020-08-01")%>%
+    filter(new_case>0)
+
+attach(manewprob)
+
+ggplot(manewprob, aes(x=submission_date))+
+           geom_line(aes(y=new_case), color="blue")+
+    geom_line(aes(y=prob_cases), color="red")+
+    theme_classic()
+
+view(manewprob)
