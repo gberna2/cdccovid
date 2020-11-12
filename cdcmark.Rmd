@@ -58,21 +58,20 @@ ggplot(matrail, aes(date, new_case))+
 
 
 
-
 ## Plot for new deaths
 
 ```{r echo=TRUE}
-ma<- g %>%
+deathtrail<- g %>%
     filter(state=="MA") %>%
-    filter(as.Date(submission_date)>"2020-05-22")%>%
+    filter(as.Date(submission_date)>Sys.Date()-30)%>%
     select(submission_date, tot_death, new_case, new_death, ) %>%
     rename("total_deaths"=tot_death, "date"= submission_date)
 
-ggplot(ma, aes(date, new_death))+
+ggplot(deathtrail, aes(date, new_death))+
     geom_line()+
-    theme_classic()
-```
-```{r}
-
+    theme_classic()+
+    scale_x_datetime(date_breaks = "day", date_labels = "%d")+
+    theme_classic()+
+    labs(title = "MA Deaths Trailing 30")
 ```
 
