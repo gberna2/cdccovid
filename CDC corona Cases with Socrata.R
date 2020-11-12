@@ -52,3 +52,5 @@ ggplot(manewprob, aes(x=submission_date))+
     theme_classic()
 
 view(manewprob)
+
+
