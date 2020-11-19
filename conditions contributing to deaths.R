@@ -1,5 +1,6 @@
 library(tidyverse)
 library(ggthemes)
+getwd()
 
 #read in data from cdc 
 conditions<-read.socrata("https://data.cdc.gov/resource/hk9y-quqm.json", app_token = "du1xYluz5Q3hWLPoeoxced3Dg", stringsAsFactors = FALSE)
