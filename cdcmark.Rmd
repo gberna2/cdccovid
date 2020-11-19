@@ -1,5 +1,9 @@
 ---
+<<<<<<< HEAD
 title: "Coronavirus Dashboard" 
+=======
+title: "coronavirus dashboard" 
+>>>>>>> af2d85a7d1a64c3f4683fb7f2bcd1f44c2c46249
 Author: "GB"
 output: html_document
 ---
