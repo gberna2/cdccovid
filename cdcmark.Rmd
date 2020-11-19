@@ -1,5 +1,5 @@
 ---
-title: "covid" 
+title: "Coronavirus Dashboard" 
 Author: "GB"
 output: html_document
 ---
@@ -22,7 +22,8 @@ g$new_death=as.numeric(g$new_death)
 g$new_case=as.numeric(g$new_case)
 ```
 
-## This is the covid new cases chart
+### This is the covid new cases chart
+Analysis is linked to cdc website via socrata and will update when script is run
 
 ```{r echo=TRUE, include=TRUE}
 ma<- g %>%
@@ -69,9 +70,15 @@ deathtrail<- g %>%
 
 ggplot(deathtrail, aes(date, new_death))+
     geom_line()+
+    geom_point(color="red")+
     theme_classic()+
     scale_x_datetime(date_breaks = "day", date_labels = "%d")+
     theme_classic()+
     labs(title = "MA Deaths Trailing 30")
+```
+```{r}
+view(g)
+
+glimpse(g)
 ```
 

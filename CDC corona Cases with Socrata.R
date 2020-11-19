@@ -44,13 +44,9 @@ manewprob<- g%>%
     filter(as.Date(submission_date)>"2020-08-01")%>%
     filter(new_case>0)
 
-attach(manewprob)
-
 ggplot(manewprob, aes(x=submission_date))+
            geom_line(aes(y=new_case), color="blue")+
     geom_line(aes(y=prob_cases), color="red")+
     theme_classic()
-
-view(manewprob)
 
 
